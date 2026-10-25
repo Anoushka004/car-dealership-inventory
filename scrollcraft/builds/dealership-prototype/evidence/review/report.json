@@ -1,0 +1,75 @@
+{
+  "checks": [
+    "No overflow: A desktop",
+    "No overflow: B desktop",
+    "No overflow: C desktop",
+    "No overflow: A phone",
+    "No overflow: B phone",
+    "No overflow: C phone",
+    "No overflow: A compact-reduced",
+    "No overflow: B compact-reduced",
+    "No overflow: C compact-reduced",
+    "React lifecycle: exactly one Scrollcraft instance after variant switches",
+    "Filter typing retains focus and filters correctly",
+    "Sold-out option disabled; sign-in returns to selection; double click places one order",
+    "Admin stock setter changes available total",
+    "Admin edit preserves demo photography and existing order snapshots",
+    "Cancellation restores stock once to inactive inventory without reactivation",
+    "Admin creates listing and first option together",
+    "Email/password demo login succeeds",
+    "Forgot-password response stays neutral and discloses no account existence",
+    "No browser runtime errors"
+  ],
+  "errors": [],
+  "accessibility": [
+    {
+      "variant": "A",
+      "size": "desktop",
+      "violations": []
+    },
+    {
+      "variant": "B",
+      "size": "desktop",
+      "violations": []
+    },
+    {
+      "variant": "C",
+      "size": "desktop",
+      "violations": []
+    },
+    {
+      "variant": "A",
+      "size": "phone",
+      "violations": []
+    },
+    {
+      "variant": "B",
+      "size": "phone",
+      "violations": []
+    },
+    {
+      "variant": "C",
+      "size": "phone",
+      "violations": []
+    },
+    {
+      "variant": "A",
+      "size": "compact-reduced",
+      "violations": []
+    },
+    {
+      "variant": "B",
+      "size": "compact-reduced",
+      "violations": []
+    },
+    {
+      "variant": "C",
+      "size": "compact-reduced",
+      "violations": []
+    },
+    {
+      "screen": "admin",
+      "violations": []
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "results": [
+    {
+      "name": "desktop",
+      "states": [
+        {
+          "stage": "explore",
+          "marker": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "stage": "choose",
+          "marker": "matrix(1, 0, 0, 1, 107, 0)"
+        },
+        {
+          "stage": "order",
+          "marker": "matrix(1, 0, 0, 1, 214, 0)"
+        },
+        {
+          "stage": "prepare",
+          "marker": "matrix(1, 0, 0, 1, 321, 0)"
+        },
+        {
+          "stage": "handover",
+          "marker": "matrix(1, 0, 0, 1, 428, 0)"
+        }
+      ],
+      "keyboard": "passed",
+      "accessibilityFindings": 0,
+      "inventoryAction": "passed"
+    },
+    {
+      "name": "phone",
+      "states": [
+        {
+          "stage": "explore",
+          "marker": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "stage": "choose",
+          "marker": "matrix(1, 0, 0, 1, 107, 0)"
+        },
+        {
+          "stage": "order",
+          "marker": "matrix(1, 0, 0, 1, 214, 0)"
+        },
+        {
+          "stage": "prepare",
+          "marker": "matrix(1, 0, 0, 1, 321, 0)"
+        },
+        {
+          "stage": "handover",
+          "marker": "matrix(1, 0, 0, 1, 428, 0)"
+        }
+      ],
+      "keyboard": "passed",
+      "accessibilityFindings": 0,
+      "inventoryAction": "passed"
+    },
+    {
+      "name": "compact",
+      "states": [
+        {
+          "stage": "explore",
+          "marker": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "stage": "choose",
+          "marker": "matrix(1, 0, 0, 1, 107, 0)"
+        },
+        {
+          "stage": "order",
+          "marker": "matrix(1, 0, 0, 1, 214, 0)"
+        },
+        {
+          "stage": "prepare",
+          "marker": "matrix(1, 0, 0, 1, 321, 0)"
+        },
+        {
+          "stage": "handover",
+          "marker": "matrix(1, 0, 0, 1, 428, 0)"
+        }
+      ],
+      "keyboard": "passed",
+      "accessibilityFindings": 0,
+      "inventoryAction": "passed"
+    },
+    {
+      "name": "reduced",
+      "states": [
+        {
+          "stage": "explore",
+          "marker": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "stage": "choose",
+          "marker": "matrix(1, 0, 0, 1, 107, 0)"
+        },
+        {
+          "stage": "order",
+          "marker": "matrix(1, 0, 0, 1, 214, 0)"
+        },
+        {
+          "stage": "prepare",
+          "marker": "matrix(1, 0, 0, 1, 321, 0)"
+        },
+        {
+          "stage": "handover",
+          "marker": "matrix(1, 0, 0, 1, 428, 0)"
+        }
+      ],
+      "keyboard": "passed",
+      "accessibilityFindings": 0,
+      "inventoryAction": "passed"
+    }
+  ],
+  "errors": []
+}

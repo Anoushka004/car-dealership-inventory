@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "Phone menu, filters, detail, account, order placement and Escape dialog dismissal",
+    "Phone admin contains wide option tables within horizontal scroll containers",
+    "Phone admin WCAG A/AA automated checks: no findings",
+    "Production package loads scripts/images and opens detail at root; development toolbar omitted"
+  ],
+  "failures": []
+}

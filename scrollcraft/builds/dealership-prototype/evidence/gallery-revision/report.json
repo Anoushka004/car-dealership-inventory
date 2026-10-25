@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "name": "desktop",
+      "clips": [
+        "inset(0px 68.48% 0px 0px)",
+        "inset(0px 35.15% 0px 0px)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "photoNavigation": "passed",
+      "overflow": "none"
+    },
+    {
+      "name": "phone",
+      "clips": [
+        "inset(0px 85.41% 0px 0px)",
+        "inset(0px 35.17% 0px 0px)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "photoNavigation": "passed",
+      "overflow": "none"
+    },
+    {
+      "name": "reduced",
+      "clips": [
+        "none",
+        "none",
+        "none"
+      ],
+      "photoNavigation": "passed",
+      "overflow": "none"
+    }
+  ],
+  "errors": []
+}
