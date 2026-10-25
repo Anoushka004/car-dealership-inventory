@@ -54,29 +54,53 @@ def database():
             netloc=f"{role}:{quote(password)}@{host}:{parsed.port or 5432}", path=f"/{name}"
         )
     )
-    with psycopg.connect(admin_url, autocommit=True) as conn:
-        conn.execute(
-            sql.SQL("CREATE ROLE {} LOGIN PASSWORD {}").format(
-                sql.Identifier(role), sql.Literal(password)
-            )
-        )
-        conn.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(name)))
-    environment = PrivateEnvironment(
-        {
-            "MIGRATION_DATABASE_URL": migrator_url,
-            "DATABASE_URL": runtime_url,
-            "APP_MODE": "local",
-            "READINESS_KEY": "test-readiness-secret-at-least-32-characters",
-            "PROTECTION_ID_KEY": uuid.uuid4().hex + uuid.uuid4().hex,
-            "PROTECTION_NAMESPACE": "foundation-test",
-        }
-    )
+    created_role = False
+    created_database = False
     try:
+        with psycopg.connect(admin_url, autocommit=True, connect_timeout=5) as conn:
+            conn.execute(
+                sql.SQL("CREATE ROLE {} LOGIN PASSWORD {}").format(
+                    sql.Identifier(role), sql.Literal(password)
+                )
+            )
+            created_role = True
+            conn.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(name)))
+            created_database = True
+        environment = PrivateEnvironment(
+            {
+                "MIGRATION_DATABASE_URL": migrator_url,
+                "DATABASE_URL": runtime_url,
+                "APP_MODE": "local",
+                "READINESS_KEY": "test-readiness-secret-at-least-32-characters",
+                "PROTECTION_ID_KEY": uuid.uuid4().hex + uuid.uuid4().hex,
+                "PROTECTION_NAMESPACE": "foundation-test",
+            }
+        )
         yield PrivateEnvironment(env=environment, role=role, migrator_url=migrator_url)
     finally:
-        with psycopg.connect(admin_url, autocommit=True) as conn:
-            conn.execute(sql.SQL("DROP DATABASE {} WITH (FORCE)").format(sql.Identifier(name)))
-            conn.execute(sql.SQL("DROP ROLE {}").format(sql.Identifier(role)))
+        cleanup_errors = []
+        for created, statement in (
+            (
+                created_database,
+                sql.SQL("DROP DATABASE {} WITH (FORCE)").format(sql.Identifier(name)),
+            ),
+            (created_role, sql.SQL("DROP ROLE {}").format(sql.Identifier(role))),
+        ):
+            if created:
+                try:
+                    with psycopg.connect(admin_url, autocommit=True, connect_timeout=5) as conn:
+                        conn.execute("SET statement_timeout = '10s'")
+                        conn.execute(statement)
+                except Exception as error:
+                    cleanup_errors.append(error)
+        if cleanup_errors:
+            primary_error = sys.exception()
+            if primary_error is None:
+                raise ExceptionGroup("Isolated database resource cleanup failed", cleanup_errors)
+            primary_error.add_note(
+                "Resource cleanup also failed: "
+                + ", ".join(type(error).__name__ for error in cleanup_errors)
+            )
 
 
 @pytest.fixture

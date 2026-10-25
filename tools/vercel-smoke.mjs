@@ -17,8 +17,8 @@ const { FileFsRef } = await import('@vercel/build-utils');
 const sourceDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const temporaryRoot = await mkdtemp(path.join(tmpdir(), 'dealership-vercel-smoke-'));
 
-const excludedSource = /(^|\/)(?:\.git|\.github|\.venv|\.vercel|node_modules|__pycache__|tests|docs|tools)(?:\/|$)|(^|\/)\.env(?:[./]|$)|\.(?:pyc|pem|key|sqlite3|db|log)$/i;
-const forbiddenBundle = /(^|\/)(?:\.git|\.github|\.venv|node_modules|tests|docs|tools)(?:\/|$)|(^|\/)\.env(?:[./]|$)|\.(?:pem|key|sqlite3|db|log)$/i;
+const excludedSource = /(^|\/)(?:\.git|\.github|\.venv|\.vercel|\.local-state|pytest-cache-files-[^/]+|node_modules|__pycache__|tests|docs|tools)(?:\/|$)|(^|\/)\.env(?:[./]|$)|\.(?:pyc|pem|key|sqlite3|db|log)$/i;
+const forbiddenBundle = /(^|\/)(?:\.git|\.github|\.venv|\.local-state|pytest-cache-files-[^/]+|node_modules|tests|docs|tools)(?:\/|$)|(^|\/)\.env(?:[./]|$)|\.(?:pem|key|sqlite3|db|log)$/i;
 
 try {
   const trackedFiles = execFileSync('git', ['ls-files', '-z'], {
@@ -48,7 +48,7 @@ try {
     entrypoint: 'app/main.py',
     config: {
       framework: 'fastapi',
-      excludeFiles: '{tests/**,docs/**,tools/**,.github/**,.env*}',
+      excludeFiles: '{tests/**,docs/**,tools/**,.github/**,.local-state/**,pytest-cache-files-*/**,.env*}',
     },
     meta: { isDev: false },
   });
