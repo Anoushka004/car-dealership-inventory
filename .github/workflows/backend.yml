@@ -37,6 +37,9 @@ jobs:
           python-version: "3.13"
       - run: python -m pip install --no-deps -r requirements-dev.lock
       - run: python -m pip check
+      - run: docker compose config --quiet
+        env:
+          POSTGRES_PASSWORD: isolated-compose-syntax-check
       - run: python -m ruff check .
       - run: python -m pytest tests/api tests/concurrency tests/migrations
   vercel-package:

@@ -7,3 +7,5 @@ tools
 __pycache__
 .pytest_cache
 .ruff_cache
+.local-state
+pytest-cache-files-*
