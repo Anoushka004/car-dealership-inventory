@@ -39,10 +39,13 @@ admit iff available_credit >= q for every required bucket
 on admission: credit = available_credit - q
 on denial: credit = available_credit
 stored_time = effective_time
-Retry-After = ceil(max_i(max(0, q_i-available_credit_i)/(p_i*1_000_000)))
+wait_us_i = 0                                      if available_credit_i >= q_i
+wait_us_i = (effective_time_i - database_sample)
+            + ceil((q_i - available_credit_i)/p_i) otherwise
+Retry-After = ceil(max_i(wait_us_i)/1_000_000)
 ```
 
-Calculate ceilings using integer arithmetic and bound elapsed time at the amount needed to reach capacity before multiplication. No binary float or rounding-away fractional refill. A backward database clock adjustment must not move stored time backwards and mint the same elapsed time twice. A genuine denied request has a positive whole-second delay. The response is an earliest possible admission time, not a reservation against competing traffic.
+Calculate ceilings using integer arithmetic and bound elapsed time at the amount needed to reach capacity before multiplication. No binary float or rounding-away fractional refill. Here `effective_time_i = max(database_sample, stored_time_i)`. A backward database clock adjustment must not move stored time backwards and mint the same elapsed time twice; a deficient bucket's delay also includes the time needed for the database clock to catch up to its stored time. A genuine denied request has a positive whole-second delay. The response is an earliest possible admission time, not a reservation against competing traffic.
 
 Use `bigint` for bounded credits and timestamps or PostgreSQL `numeric` for intermediate calculations with explicit bounds. PostgreSQL documents integer ranges and exact arbitrary-precision arithmetic. [Numeric types](https://www.postgresql.org/docs/17/datatype-numeric.html).
 
