@@ -220,3 +220,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Frontend dependencies and generated artifacts
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.vercel/
+.env.*
+!.env.example
+.local-tools/
+*.db
+*.db-wal
+*.db-shm
+*.pem
+*.key
+.DS_Store
+Thumbs.db
