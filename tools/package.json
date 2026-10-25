@@ -1,0 +1,21 @@
+{
+  "name": "dealership-foundation-build-tools",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "scripts": {
+    "smoke": "node vercel-smoke.mjs"
+  },
+  "dependencies": {
+    "@vercel/build-utils": "15.0.2",
+    "@vercel/python": "28.0.2"
+  },
+  "overrides": {
+    "@vercel/python-analysis": {
+      "js-yaml": "4.3.2",
+      "minimatch": "10.2.3"
+    }
+  }
+}
